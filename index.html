@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emily Nivea | Frontend Engineer</title>
+    <link rel="icon" type="image/png" href="imagens/logo.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&family=Quicksand:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --main-purple: #8A2BE2;
+            --light-purple: #B19CD9;
+            --neon-purple: #CC99FF;
+            --vibrant-purple: #9932CC;
+            --dark-bg: #0D0D0D;
+            --light-text: #F8F8FF;
+            --accent-pink: #FF69B4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            font-family: 'Quicksand', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* INTRO SECTION */
+        .intro {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(rgba(13, 13, 13, 0.7), rgba(13, 13, 13, 0.7)),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(177, 156, 217, 0.05) 2px, rgba(177, 156, 217, 0.05) 4px);
+            z-index: 1;
+        }
+
+        .intro-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .intro-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid var(--light-purple);
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(177, 156, 217, 0.3);
+        }
+
+        .intro-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name-container {
+            position: relative;
+            height: 150px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .typing-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--light-purple);
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .typing-text::before {
+            content: "Emily Nivea";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            color: var(--neon-purple);
+            overflow: hidden;
+            border-right: 4px solid var(--light-purple);
+            animation: typing 4s steps(11) forwards;
+        }
+
+        @keyframes typing {
+            0% {
+                width: 0;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 50px;
+            background-color: var(--light-purple);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* MAIN SECTION */
+        .main-section {
+            min-height: 100vh;
+            position: relative;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            perspective: 1000px;
+            z-index: 1;
+        }
+
+        .grid {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            transform-style: preserve-3d;
+            transform: rotateX(75deg);
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: rotateX(75deg) translateY(0);
+            }
+
+            100% {
+                transform: rotateX(75deg) translateY(50%);
+            }
+        }
+
+        .grid::before,
+        .grid::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(to right, rgba(177, 156, 217, 0.15) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(177, 156, 217, 0.15) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background-color: var(--light-purple);
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding-top: 40px;
+        }
+
+        .text-content {
+            flex: 1;
+            min-width: 300px;
+            padding: 2rem;
+        }
+
+        .greeting {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .wave-emoji {
+            display: inline-block;
+            font-size: 2rem;
+            margin-right: 10px;
+            animation: wave 2.5s infinite;
+            transform-origin: 70% 70%;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            10% {
+                transform: rotate(14deg);
+            }
+
+            20% {
+                transform: rotate(-8deg);
+            }
+
+            30% {
+                transform: rotate(14deg);
+            }
+
+            40% {
+                transform: rotate(-4deg);
+            }
+
+            50% {
+                transform: rotate(10deg);
+            }
+
+            60% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .name-intro {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--light-purple);
+        }
+
+        .title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.3;
+        }
+
+        .highlight {
+            color: var(--main-purple);
+            position: relative;
+            display: inline-block;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--neon-purple);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.5s ease-out;
+        }
+
+        .highlight:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .photo-area {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .photo-frame {
+            width: 100%;
+            max-width: 350px;
+            height: 400px;
+            border: 2px solid var(--light-purple);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            background-color: rgba(138, 43, 226, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(177, 156, 217, 0.3);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--light-purple);
+        }
+
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .photo-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .photo-text {
+            font-size: 1rem;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(13, 13, 13, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--light-purple);
+            overflow: hidden;
+        }
+
+        .header-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--neon-purple);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .logo::before {
+            content: '<';
+            opacity: 0;
+            margin-right: 5px;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateX(10px);
+        }
+
+        .logo::after {
+            content: '/>';
+            opacity: 0;
+            margin-left: 5px;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateX(-10px);
+        }
+
+        .logo:hover::before,
+        .logo:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromBottom {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s forwards;
+        }
+
+        .animate-slide-left {
+            opacity: 0;
+            animation: slideInFromLeft 1s forwards;
+        }
+
+        .animate-slide-right {
+            opacity: 0;
+            animation: slideInFromRight 1s forwards;
+        }
+
+        .animate-slide-bottom {
+            opacity: 0;
+            animation: slideInFromBottom 1s forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.8s;
+        }
+
+        .delay-5 {
+            animation-delay: 1s;
+        }
+
+        /* Circuit lines animation */
+        .circuit-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .circuit-line {
+            position: absolute;
+            background-color: var(--light-purple);
+            opacity: 0.3;
+        }
+
+        .horizontal-line {
+            height: 2px;
+            width: 0;
+            animation: growHorizontal 2s forwards;
+        }
+
+        .vertical-line {
+            width: 2px;
+            height: 0;
+            animation: growVertical 2s forwards;
+        }
+
+        @keyframes growHorizontal {
+            to {
+                width: 100px;
+            }
+        }
+
+        @keyframes growVertical {
+            to {
+                height: 100px;
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .typing-text {
+                font-size: 2.5rem;
+            }
+
+            .intro-content {
+                flex-direction: column;
+            }
+
+            .intro-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .content {
+                flex-direction: column;
+            }
+
+            .text-content,
+            .photo-area {
+                padding: 1rem;
+            }
+
+            .name-intro,
+            .title {
+                font-size: 1.8rem;
+            }
+
+            .description {
+                font-size: 1rem;
+            }
+
+            .photo-frame {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Intro Section with Name Animation -->
+        <section class="intro">
+            <div class="intro-content">
+                <div class="name-container">
+                    <div class="typing-text">Emily Nivea</div>
+                    <div class="cursor"></div>
+                </div>
+
+                <div class="circuit-container">
+                    <!-- Circuit lines will be added by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Header -->
+        <header class="header animate-fade-in">
+            <a href="#" class="logo">EN</a>
+        </header>
+
+        <!-- Main Section -->
+        <section class="main-section">
+            <div class="grid-bg">
+                <div class="grid"></div>
+                <div class="stars" id="stars"></div>
+            </div>
+
+            <div class="content">
+                <div class="text-content">
+                    <div class="greeting animate-slide-left">
+                        <span class="wave-emoji">✌🏻</span>
+                        <span>Olá</span>
+                    </div>
+
+                    <h1 class="name-intro animate-slide-left delay-1">Eu sou Emily Nivea</h1>
+
+                    <h2 class="title animate-slide-left delay-2">
+                        Estudante de ADS <span class="highlight">Frontend Engineer</span>. adoro fazer
+                        <span class="highlight">Sites</span> e <span class="highlight">Aplicativos</span>
+                        <span class="highlight">Ministra de louvor</span> da IEQNC.
+                    </h2>
+
+                    <p class="description animate-slide-left delay-3">
+                        Olá! 👋 Me chamo Emily Nívea, sou desenvolvedora Front-End e
+                        além da tecnologia, também sou ministra de louvor na IEQNC, onde sirvo com o coração e a voz. Acredito no poder de transformar
+                        ideias em soluções funcionais, belas e inspiradoras, tanto no código quanto na vida.
+                    </p>
+                </div>
+
+                <div class="photo-area animate-slide-right delay-2">
+                    <div class="photo-frame">
+                        <!-- Aqui você pode adicionar sua foto diretamente no código -->
+                        <div class="photo-placeholder">
+                            <img src="imagens/me.png" alt="eu">
+                        </div>
+                        <!-- Exemplo: <img src="sua-foto.jpg" alt="Emily Nivea" style="width:100%;height:100%;object-fit:cover;"> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Create stars
+        document.addEventListener('DOMContentLoaded', function () {
+            const starsContainer = document.getElementById('stars');
+            const numStars = 100;
+
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+
+                // Random size
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+
+                // Random twinkle delay
+                star.style.animationDelay = `${Math.random() * 5}s`;
+
+                starsContainer.appendChild(star);
+            }
+
+            // Create circuit lines
+            createCircuitLines();
+
+            // Add scroll animations
+            const animatedElements = document.querySelectorAll('.animate-slide-left, .animate-slide-right, .animate-slide-bottom');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        });
+
+        // Create circuit lines around the name
+        function createCircuitLines() {
+            const circuitContainer = document.querySelector('.circuit-container');
+            const nameContainer = document.querySelector('.name-container');
+            const rect = nameContainer.getBoundingClientRect();
+
+            // Create circuit lines
+            const positions = [
+                { x: -50, y: 0, type: 'horizontal', delay: 0 },
+                { x: -50, y: 0, type: 'vertical', delay: 0.5 },
+                { x: rect.width + 50, y: 0, type: 'horizontal', delay: 0.2 },
+                { x: rect.width, y: 0, type: 'vertical', delay: 0.7 },
+                { x: -30, y: rect.height, type: 'horizontal', delay: 0.3 },
+                { x: rect.width - 20, y: rect.height, type: 'horizontal', delay: 0.9 }
+            ];
+
+            positions.forEach(pos => {
+                const line = document.createElement('div');
+                line.classList.add('circuit-line');
+
+                if (pos.type === 'horizontal') {
+                    line.classList.add('horizontal-line');
+                    line.style.top = `${pos.y}px`;
+                    line.style.left = `${pos.x}px`;
+                } else {
+                    line.classList.add('vertical-line');
+                    line.style.left = `${pos.x}px`;
+                    line.style.top = `${pos.y}px`;
+                }
+
+                line.style.animationDelay = `${pos.delay}s`;
+                circuitContainer.appendChild(line);
+            });
+        }
+    </script>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'94e34092f27df61f',t:'MTc0OTY2NzM4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>
