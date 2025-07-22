@@ -97,19 +97,65 @@
         }
 
         .typing-text {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Orbitron', 'Share Tech Mono', monospace;
             font-size: 4rem;
-            color: transparent;
-            -webkit-text-stroke: 2px var(--light-purple);
+            color: var(--light-purple);
+            text-align: center;
             position: relative;
             white-space: nowrap;
+            letter-spacing: 0.08em;
+            background: none;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        .typing-text span {
+            opacity: 0.3;
+            filter: blur(0.5px);
+            transition: color 0.2s, text-shadow 0.2s, opacity 0.2s;
+            color: var(--light-purple);
+        }
+        .typing-text span.illuminated {
+            opacity: 1;
+            color: var(--neon-purple);
+            text-shadow:
+                0 0 8px var(--neon-purple),
+                0 0 16px var(--main-purple),
+                0 0 32px var(--accent-pink);
+            filter: none;
         }
 
         .typing-text::before {
-            content: "Emily Nivea";
+        }
+
+        @keyframes brackets-fade {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .typing-text .scanline {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: linear-gradient(180deg, transparent 40%, rgba(255,255,255,0.08) 50%, transparent 60%);
+            animation: scanline-move 2.5s linear infinite;
+        }
+
+        @keyframes scanline-move {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+
+        /* Ajuste da animação de digitação para manter o efeito futurista */
+        .typing-text[data-typed]::before {
+            content: attr(data-typed);
             position: absolute;
             top: 0;
-            left: 0;
+            left: 32px;
             width: 0;
             height: 100%;
             color: var(--neon-purple);
@@ -361,6 +407,7 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 0 20px rgba(177, 156, 217, 0.3);
+            animation: floatY 2.5s ease-in-out infinite;
         }
 
         .photo-placeholder {
@@ -584,10 +631,16 @@
             }
         }
 
+        @keyframes floatY {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
+
         /* RESPONSIVE */
         @media (max-width: 768px) {
             .typing-text {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
 
             .intro-content {
@@ -621,6 +674,135 @@
                 height: 350px;
             }
         }
+
+        /* Currículo Section Styles */
+        .curriculo-section {
+            background: rgba(13, 13, 13, 0.95);
+            padding: 3rem 0 2rem 0;
+            color: var(--light-text);
+            font-family: 'Quicksand', sans-serif;
+            border-top: 2px solid var(--light-purple);
+            box-shadow: 0 -2px 20px rgba(177, 156, 217, 0.1);
+        }
+        .curriculo-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(177, 156, 217, 0.04);
+            border-radius: 16px;
+            box-shadow: 0 0 20px rgba(177, 156, 217, 0.08);
+            padding: 2.5rem 2rem;
+        }
+        .curriculo-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--neon-purple);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        .curriculo-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+        .curriculo-nome {
+            font-size: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--light-purple);
+            font-weight: 700;
+        }
+        .curriculo-whatsapp {
+            display: flex;
+            align-items: center;
+            background: var(--accent-pink);
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(255, 105, 180, 0.15);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .curriculo-whatsapp:hover {
+            background: var(--main-purple);
+            box-shadow: 0 4px 16px rgba(138, 43, 226, 0.15);
+        }
+        .wa-icon {
+            font-size: 1.3rem;
+            margin-right: 8px;
+        }
+        .curriculo-bloco {
+            margin-bottom: 1.5rem;
+            background: rgba(177, 156, 217, 0.07);
+            border-radius: 10px;
+            padding: 1.2rem 1rem;
+            box-shadow: 0 1px 8px rgba(177, 156, 217, 0.04);
+        }
+        .curriculo-sub {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--main-purple);
+            font-size: 1.2rem;
+            margin-bottom: 0.7rem;
+            letter-spacing: 1px;
+        }
+        .curriculo-bloco ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .curriculo-bloco li {
+            margin-bottom: 0.7rem;
+            font-size: 1.05rem;
+        }
+        .curriculo-btn {
+            display: inline-block;
+            margin-left: 10px;
+            background: var(--light-purple);
+            color: var(--dark-bg);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+            box-shadow: 0 1px 6px rgba(177, 156, 217, 0.10);
+        }
+        .curriculo-btn:hover {
+            background: var(--accent-pink);
+            color: #fff;
+        }
+        .curriculo-equipe {
+            font-size: 0.98rem;
+            color: var(--light-purple);
+            margin-top: 0.7rem;
+        }
+        .curriculo-habilidades {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .curriculo-habilidades li {
+            min-width: 220px;
+        }
+        @media (max-width: 700px) {
+            .curriculo-container {
+                padding: 1.2rem 0.5rem;
+            }
+            .curriculo-title {
+                font-size: 1.5rem;
+            }
+            .curriculo-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .curriculo-habilidades {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
     </style>
 </head>
 
@@ -630,7 +812,7 @@
         <section class="intro">
             <div class="intro-content">
                 <div class="name-container">
-                    <div class="typing-text">Emily Nivea</div>
+                    <div class="typing-text" id="tech-typing"></div>
                     <div class="cursor"></div>
                 </div>
 
@@ -662,7 +844,7 @@
                     <h1 class="name-intro animate-slide-left delay-1">Eu sou Emily Nivea</h1>
 
                     <h2 class="title animate-slide-left delay-2">
-                        Estudante de ADS <span class="highlight">Frontend Engineer</span>. adoro fazer
+                        Estudante de ADS,<span class="highlight">Frontend Engineer</span>. adoro fazer
                         <span class="highlight">Sites</span> e <span class="highlight">Aplicativos</span>
                         <span class="highlight">Ministra de louvor</span> da IEQNC.
                     </h2>
@@ -682,6 +864,83 @@
                         </div>
                         <!-- Exemplo: <img src="sua-foto.jpg" alt="Emily Nivea" style="width:100%;height:100%;object-fit:cover;"> -->
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Currículo Section -->
+        <section class="curriculo-section">
+            <div class="curriculo-container">
+                <h2 class="curriculo-title">Currículo</h2>
+                <div class="curriculo-header">
+                    <div class="curriculo-nome">Emily Nivea Ribeiro da Silva</div>
+                    <a class="curriculo-whatsapp" href="https://wa.me/5599999999999" target="_blank" title="Fale comigo no WhatsApp">
+                        <span class="wa-icon">📱</span> WhatsApp
+                    </a>
+                </div>
+                <div class="curriculo-bloco">
+                    <h3 class="curriculo-sub">Objetivo Profissional</h3>
+                    <p>Técnica em Informática com experiência em suporte técnico, desenvolvimento de software e manutenção.</p>
+                </div>
+                <div class="curriculo-bloco">
+                    <h3 class="curriculo-sub">Formação Acadêmica</h3>
+                    <ul>
+                        <li><b>Técnico em Informática</b><br>Escola Técnica Estadual Magalhães Barata (ETEMB) - Belém, Pará<br>2022 - 2024</li>
+                        <li><b>Cursando Análise e Desenvolvimento de Sistemas</b><br>UNAMA Alcindo Cacela - Belém, Pará<br>2025 - Previsão de Conclusão: 2026</li>
+                    </ul>
+                </div>
+                <div class="curriculo-bloco">
+                    <h3 class="curriculo-sub">Experiência Profissional</h3>
+                    <ul>
+                        <li>
+                            Criação de um Aplicativo Para a escola
+                            <a class="curriculo-btn" href="#" target="_blank">Ver site</a>
+                        </li>
+                        <li>
+                            Criação de um Site de Músicas e Filmes
+                            <a class="curriculo-btn" href="#" target="_blank">Movies And Music</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="curriculo-bloco">
+                    <h3 class="curriculo-sub">Projetos na Faculdade</h3>
+                    <ul>
+                        <li>
+                            Site para apresentação sobre imagem pessoal nas redes sociais
+                            <a class="curriculo-btn" href="#" target="_blank">Ver site</a>
+                        </li>
+                        <li>
+                            Site sobre a COP 30
+                            <a class="curriculo-btn" href="#" target="_blank">Ver site</a>
+                        </li>
+                        <li>
+                            Jogo em desenvolvimento com equipe JELMY
+                            <a class="curriculo-btn" href="#" target="_blank">Trailer no YouTube</a>
+                        </li>
+                    </ul>
+                    <p class="curriculo-equipe">Colaborei nesses projetos com uma equipe de 5 pessoas para implementar funcionalidades e realizar testes.</p>
+                </div>
+                <div class="curriculo-bloco">
+                    <h3 class="curriculo-sub">Habilidades Técnicas</h3>
+                    <ul class="curriculo-habilidades">
+                        <li><b>Linguagens de Programação:</b> JavaScript, Python, C#</li>
+                        <li><b>Sistemas Operacionais:</b> Windows</li>
+                        <li><b>Banco de Dados:</b> MySQL, Firebase</li>
+                        <li><b>Outras Habilidades:</b> Desenvolvimento web</li>
+                    </ul>
+                </div>
+                <div class="curriculo-bloco">
+                    <h3 class="curriculo-sub">Certificações</h3>
+                    <ul>
+                        <li>Programação Python - UFPA (Universidade Federal do Pará) - 2024</li>
+                    </ul>
+                </div>
+                <div class="curriculo-bloco">
+                    <h3 class="curriculo-sub">Idiomas</h3>
+                    <ul>
+                        <li><b>Português:</b> Nativo</li>
+                        <li><b>Inglês:</b> Intermediário</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -732,6 +991,28 @@
                 el.style.animationPlayState = 'paused';
                 observer.observe(el);
             });
+        });
+
+        // Efeito de iluminação letra a letra para o nome
+        document.addEventListener('DOMContentLoaded', function () {
+            const name = 'Emily Nivea';
+            const container = document.getElementById('tech-typing');
+            container.innerHTML = '';
+            for (let i = 0; i < name.length; i++) {
+                const span = document.createElement('span');
+                span.textContent = name[i] === ' ' ? '\u00A0' : name[i];
+                container.appendChild(span);
+            }
+            const spans = container.querySelectorAll('span');
+            let idx = 0;
+            function illuminate() {
+                if (idx < spans.length) {
+                    spans[idx].classList.add('illuminated');
+                    idx++;
+                    setTimeout(illuminate, 120);
+                }
+            }
+            illuminate();
         });
 
         // Create circuit lines around the name
